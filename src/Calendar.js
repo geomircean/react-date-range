@@ -87,7 +87,8 @@ class Calendar extends Component {
 
     const newMonth = this.state.shownDate.clone().month(month);
     this.setState({
-      shownDate : newMonth
+      shownDate : newMonth,
+      showMonthsView: false
     });
   }
 
@@ -96,7 +97,8 @@ class Calendar extends Component {
 
     const newYear = this.state.shownDate.clone().year(year);
     this.setState({
-      shownDate : newYear
+      shownDate : newYear,
+      showYearsView: false
     });
   }
 

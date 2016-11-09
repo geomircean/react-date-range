@@ -19,9 +19,8 @@ class DateTimePickerMonths extends Component{
 
   setMonth(month, event) {
     event.preventDefault();
-      debugger;
-      this.props.setMonth(month, event);
-    }
+    this.props.setMonth(month, event);
+  }
 
     renderMonths() {
       var date = this.props.shownDate,

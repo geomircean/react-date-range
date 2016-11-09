@@ -17,7 +17,8 @@ class DateTimePickerYears extends Component {
 		</div>);
 	}
 
-	setYear(year) {
+	setYear(year, event) {
+    event.preventDefault();
     this.props.setYear(year, event);
 	}
 
