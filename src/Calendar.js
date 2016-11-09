@@ -3,6 +3,8 @@ import moment from 'moment';
 import parseInput from './utils/parseInput.js';
 import DayCell from './DayCell.js';
 import getTheme from './styles.js';
+import MonthsView from './MonthsView.js';
+import YearsView from './YearsView.js';
 
 function checkRange(dayMoment, range) {
   return (
@@ -32,6 +34,8 @@ class Calendar extends Component {
       date,
       shownDate : (range && range['endDate'] || date).clone().add(offset, 'months'),
       firstDayOfWeek: (firstDayOfWeek || moment.localeData().firstDayOfWeek()),
+      showMonthsView: false,
+      showYearsView: false,
     }
 
     this.state  = state;
@@ -78,6 +82,49 @@ class Calendar extends Component {
     });
   }
 
+  setMonth(month, event) {
+    event.preventDefault();
+
+    const newMonth = this.state.shownDate.clone().month(month);
+    this.setState({
+      shownDate : newMonth
+    });
+  }
+
+  setYear(year, event) {
+    event.preventDefault();
+
+    const newYear = this.state.shownDate.clone().year(year);
+    this.setState({
+      shownDate : newYear
+    });
+  }
+
+
+  appendTime(direction, type, event) {
+    event.preventDefault();
+    const { link, linkCB } = this.props;
+
+    if (link && linkCB) {
+      return linkCB(direction);
+    }
+
+    const newDate = this.state.shownDate.clone().add(direction, type);
+    this.setState({
+      shownDate : newDate
+    });
+  }
+
+  toggleMonthsView(event) {
+    event.preventDefault();
+    this.setState({showMonthsView: !this.state.showMonthsView});
+  }
+
+  toggleYearsView(event) {
+    event.preventDefault();
+    this.setState({showYearsView: !this.state.showYearsView});
+  }
+
   renderMonthAndYear() {
     const shownDate  = this.getShownDate();
     const month      = moment.months(shownDate.month());
@@ -93,9 +140,11 @@ class Calendar extends Component {
           <i style={{ ...styles['MonthArrow'], ...styles['MonthArrowPrev'] }}></i>
         </button>
         <span>
-          <span className='rdr-MonthAndYear-month'>{month}</span>
+          <span className='rdr-MonthAndYear-month' onMouseDown={this.toggleMonthsView.bind(this)} >{month}</span>
           <span className='rdr-MonthAndYear-divider'> - </span>
-          <span className='rdr-MonthAndYear-year'>{year}</span>
+          <span className='rdr-MonthAndYear-year' onMouseDown={this.toggleYearsView.bind(this)}>{year}</span>
+          {this.state.showMonthsView ? <MonthsView setMonth={this.setMonth.bind(this)} shownDate={this.state.shownDate} appendTime={this.appendTime.bind(this)} /> : ''}
+          {this.state.showYearsView ? <YearsView  setYear={this.setYear.bind(this)} shownDate={this.state.shownDate} appendTime={this.appendTime.bind(this)} /> : ''}
         </span>
         <button
           style={{ ...styles['MonthButton'], float : 'right' }}
