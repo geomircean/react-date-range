@@ -7,7 +7,7 @@ class DateTimePickerMonths extends Component{
         <thead>
         <tr>
       <th key='prev' className='rdtPrev'><span onMouseDown={(event) => {this.props.appendTime(-1, 'months', event);}}>‹</span></th>
-        <th key='year' className='rdtSwitch' onMouseDown={(event) => {this.props.showView('years', event);}} colSpan='2' data-value={this.props.shownDate.year()} >{this.props.shownDate.year()}</th>
+        <th key='year' className='rdtSwitch' onMouseDown={(event) => {this.props.showYear(event);}} colSpan='2' data-value={this.props.shownDate.year()} >{this.props.shownDate.year()}</th>
         <th key='next' className='rdtNext'><span onMouseDown={(event) => {this.props.appendTime(1, 'months', event);}}>›</span></th>
         </tr>
         </thead>

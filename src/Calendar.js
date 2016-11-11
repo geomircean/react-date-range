@@ -119,12 +119,12 @@ class Calendar extends Component {
 
   toggleMonthsView(event) {
     event.preventDefault();
-    this.setState({showMonthsView: !this.state.showMonthsView});
+    this.setState({showMonthsView: !this.state.showMonthsView, showYearsView: false});
   }
 
   toggleYearsView(event) {
     event.preventDefault();
-    this.setState({showYearsView: !this.state.showYearsView});
+    this.setState({showYearsView: !this.state.showYearsView, showMonthsView: false});
   }
 
   renderMonthAndYear() {
@@ -145,7 +145,7 @@ class Calendar extends Component {
           <span className='rdr-MonthAndYear-month' onMouseDown={this.toggleMonthsView.bind(this)} >{month}</span>
           <span className='rdr-MonthAndYear-divider'> - </span>
           <span className='rdr-MonthAndYear-year' onMouseDown={this.toggleYearsView.bind(this)}>{year}</span>
-          {this.state.showMonthsView ? <MonthsView setMonth={this.setMonth.bind(this)} shownDate={this.state.shownDate} appendTime={this.appendTime.bind(this)} /> : ''}
+          {this.state.showMonthsView ? <MonthsView showYear={this.toggleYearsView.bind(this)} setMonth={this.setMonth.bind(this)} shownDate={this.state.shownDate} appendTime={this.appendTime.bind(this)} /> : ''}
           {this.state.showYearsView ? <YearsView  setYear={this.setYear.bind(this)} shownDate={this.state.shownDate} appendTime={this.appendTime.bind(this)} /> : ''}
         </span>
         <button

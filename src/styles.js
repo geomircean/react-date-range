@@ -11,7 +11,7 @@ const defaultTheme = {
     padding       : 10,
     background    : '#ffffff',
     borderRadius  : '2px',
-    display       : 'inline-block',
+    display       : 'block',
     boxSizing     : 'border-box',
     letterSpacing : 0,
     color         : '#000000',
