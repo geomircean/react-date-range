@@ -200,7 +200,7 @@ class Calendar extends Component {
     // Previous month's days
     const diff = (Math.abs(firstDayOfWeek - (startOfMonth + 7)) % 7);
     for (let i = diff; i >= 1; i--) {
-      const dayMoment  = lastMonth.clone().date(lastMonthDayCount - i);
+      const dayMoment  = lastMonth.clone().date(lastMonthDayCount - i + 1);
       days.push({ dayMoment, isPassive : true });
     }
 
