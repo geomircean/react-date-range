@@ -95,13 +95,14 @@ class Calendar extends Component {
   setYear(year, event) {
     event.preventDefault();
 
-    const newYear = this.state.shownDate.clone().year(year);
-    this.setState({
-      shownDate : newYear,
-      showYearsView: false
-    });
+    if (year >= 0) {
+      const newYear = this.state.shownDate.clone().year(year);
+      this.setState({
+        shownDate : newYear,
+        showYearsView: false
+      });
+    }
   }
-
 
   appendTime(direction, type, event) {
     event.preventDefault();
@@ -112,9 +113,11 @@ class Calendar extends Component {
     }
 
     const newDate = this.state.shownDate.clone().add(direction, type);
-    this.setState({
-      shownDate : newDate
-    });
+    if (newDate.year() > 0) {
+      this.setState({
+        shownDate : newDate
+      });
+    }
   }
 
   toggleMonthsView(event) {
