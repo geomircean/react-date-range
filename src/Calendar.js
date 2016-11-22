@@ -95,7 +95,7 @@ class Calendar extends Component {
   setYear(year, event) {
     event.preventDefault();
 
-    if (year >= 0) {
+    if (year >= 1000) {
       const newYear = this.state.shownDate.clone().year(year);
       this.setState({
         shownDate : newYear,
@@ -113,7 +113,7 @@ class Calendar extends Component {
     }
 
     const newDate = this.state.shownDate.clone().add(direction, type);
-    if (newDate.year() > 0) {
+    if (newDate.year() > 1000) {
       this.setState({
         shownDate : newDate
       });
