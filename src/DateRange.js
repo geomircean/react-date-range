@@ -41,13 +41,13 @@ class DateRange extends Component {
     }
   }
 
-  setRange(range) {
+  setRange(range, silent) {
     const { onChange } = this.props
     range = this.orderRange(range);
 
     this.setState({ range });
 
-    onChange && onChange(range);
+    !silent && onChange && onChange(range);
   }
 
   handleSelect(date) {
@@ -91,19 +91,27 @@ class DateRange extends Component {
 
   componentWillReceiveProps(newProps) {
     // Whenever date props changes, update state with parsed variant
-    if (newProps.startDate || newProps.endDate) {
+    if ((newProps.startDate !== this.props.startDate && newProps.startDate === '') ||
+         newProps.endDate !== this.props.endDate && newProps.endDate === '') {
       const format       = newProps.format || this.props.format;
-      const startDate    = newProps.startDate   && parseInput(newProps.startDate, format);
-      const endDate      = newProps.endDate     && parseInput(newProps.endDate, format);
-      const oldStartDate = this.props.startDate && parseInput(this.props.startDate, format);
-      const oldEndDate   = this.props.endDate   && parseInput(this.props.endDate, format);
+      this.setRange({
+        startDate: moment(),
+        endDate: moment()
+      }, true);
+    }
+    if (newProps.startDate || newProps.endDate) {
+        const format       = newProps.format || this.props.format;
+        const startDate    = newProps.startDate   && parseInput(newProps.startDate, format);
+        const endDate      = newProps.endDate     && parseInput(newProps.endDate, format);
+        const oldStartDate = this.props.startDate && parseInput(this.props.startDate, format);
+        const oldEndDate   = this.props.endDate   && parseInput(this.props.endDate, format);
 
-      if (!startDate.isSame(oldStartDate) || !endDate.isSame(oldEndDate)) {
-        this.setRange({
-          startDate: startDate || oldStartDate,
-          endDate: endDate || oldEndDate
-        }, {silent: true});
-      }
+        if (!startDate.isSame(oldStartDate) || !endDate.isSame(oldEndDate)) {
+          this.setRange({
+            startDate: startDate || oldStartDate,
+            endDate: endDate || oldEndDate
+          }, true);
+        }
     }
   }
 
