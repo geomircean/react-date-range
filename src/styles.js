@@ -98,13 +98,13 @@ const defaultTheme = {
   MonthArrowPrev : {
     borderRightWidth : '6px',
     borderRightColor : '#34495e',
-    marginLeft       : 1,
+    marginRight       : '5px',
   },
 
   MonthArrowNext : {
     borderLeftWidth  : '6px',
     borderLeftColor  : '#34495e',
-    marginLeft       : 7,
+    marginLeft       : '6px',
   },
 
   PredefinedRanges : {
