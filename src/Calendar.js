@@ -138,12 +138,12 @@ class Calendar extends Component {
 
     return (
       <div style={styles['MonthAndYear']} className='rdr-MonthAndYear-innerWrapper'>
-        <button
+        <div
           style={{ ...styles['MonthButton'], float : 'left' }}
           className='rdr-MonthAndYear-button prev'
           onMouseDown={this.changeMonth.bind(this, -1)}>
           <i style={{ ...styles['MonthArrow'], ...styles['MonthArrowPrev'] }}></i>
-        </button>
+        </div>
         <span>
           <span className='rdr-MonthAndYear-month' onMouseDown={this.toggleMonthsView.bind(this)} >{month}</span>
           <span className='rdr-MonthAndYear-divider'> - </span>
@@ -151,12 +151,12 @@ class Calendar extends Component {
           {this.state.showMonthsView ? <MonthsView showYear={this.toggleYearsView.bind(this)} setMonth={this.setMonth.bind(this)} shownDate={this.state.shownDate} appendTime={this.appendTime.bind(this)} /> : ''}
           {this.state.showYearsView ? <YearsView  setYear={this.setYear.bind(this)} shownDate={this.state.shownDate} appendTime={this.appendTime.bind(this)} /> : ''}
         </span>
-        <button
+        <div
           style={{ ...styles['MonthButton'], float : 'right' }}
           className='rdr-MonthAndYear-button next'
           onMouseDown={this.changeMonth.bind(this, +1)}>
           <i style={{ ...styles['MonthArrow'], ...styles['MonthArrowNext'] }}></i>
-        </button>
+        </div>
       </div>
     )
   }
