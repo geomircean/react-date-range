@@ -28,5 +28,5 @@
   "dependencies": {
     "moment": "^2.10.6",
     "react": ">=0.13.0"
-  },
+  }
 }
